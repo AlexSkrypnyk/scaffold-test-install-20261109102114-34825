@@ -1,0 +1,38 @@
+#!/usr/bin/env php
+<?php
+
+/**
+ * @file
+ * Main entry point for the application.
+ */
+
+declare(strict_types=1);
+
+use Symfony\Component\Console\Application;
+use AlexSkrypnyk\App\Command\JokeCommand;
+use AlexSkrypnyk\App\Command\SayHelloCommand;
+
+foreach ([
+  $GLOBALS['_composer_autoload_path'] ?? NULL,
+  __DIR__ . '/../../../autoload.php',
+  __DIR__ . '/../vendor/autoload.php',
+] as $file) {
+  if (is_string($file) && file_exists($file)) {
+    require_once $file;
+    unset($file);
+    break;
+  }
+}
+
+// @codeCoverageIgnoreStart
+$application = new Application('ScaffoldTestInstall2026110910211434825', '@scaffold-test-install-20261109102114-34825-version@');
+
+$command = new JokeCommand();
+$application->add($command);
+$application->setDefaultCommand((string) $command->getName());
+
+$command = new SayHelloCommand();
+$application->add($command);
+
+$application->run();
+// @codeCoverageIgnoreEnd

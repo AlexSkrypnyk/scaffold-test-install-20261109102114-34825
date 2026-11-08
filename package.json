@@ -1,0 +1,51 @@
+{
+    "name": "@alexskrypnyk/scaffold-test-install-20261109102114-34825",
+    "version": "0.1.0",
+    "description": "Provides scaffold-test-install-20261109102114-34825 functionality.",
+    "license": "GPL-3.0-or-later",
+    "author": {
+        "name": "Alex Skrypnyk",
+        "email": "scaffold-test-install-20261109102114-34825@alexskrypnyk.com",
+        "url": "https://alexskrypnyk.com"
+    },
+    "contributors": [],
+    "repository": "github:alexskrypnyk/scaffold-test-install-20261109102114-34825",
+    "bugs": "https://github.com/alexskrypnyk/scaffold-test-install-20261109102114-34825/issues",
+    "directories": {
+        "test": "tests"
+    },
+    "bin": {
+        "scaffold-test-install-20261109102114-34825": "./nodejs-script"
+    },
+    "scripts": {
+        "lint": "eslint nodejs-script tests/nodejs eslint.config.js && prettier --check nodejs-script \"tests/nodejs/**/*.js\" eslint.config.js",
+        "lint-fix": "eslint --fix nodejs-script tests/nodejs eslint.config.js && prettier --write nodejs-script \"tests/nodejs/**/*.js\" eslint.config.js",
+        "test": "node --test tests/nodejs/*.test.js",
+        "test-coverage": "c8 node --test tests/nodejs/*.test.js",
+        "reset": "rm -Rf node_modules package-lock.json"
+    },
+    "engines": {
+        "npm": ">=8.19.4",
+        "node": ">=20.20.1"
+    },
+    "dependencies": {},
+    "devDependencies": {
+        "@eslint/js": "^9.39.5",
+        "c8": "^10.1.3",
+        "eslint": "^9.39.5",
+        "eslint-config-prettier": "^9.1.2",
+        "globals": "^15.15.0",
+        "prettier": "^3.9.10"
+    },
+    "prettier": {
+        "singleQuote": true,
+        "overrides": [
+            {
+                "files": "nodejs-script",
+                "options": {
+                    "parser": "babel"
+                }
+            }
+        ]
+    }
+}

@@ -1,0 +1,98 @@
+<p align="center">
+  <a href="" rel="noopener">
+  <img width=200px height=200px src="https://placehold.jp/000000/ffffff/200x200.png?text=scaffold-test-install-20261109102114-34825&css=%7B%22border-radius%22%3A%22%20100px%22%7D" alt="scaffold-test-install-20261109102114-34825 logo"></a>
+</p>
+
+<h1 align="center">Few lines describing your project</h1>
+
+<div align="center">
+
+[![GitHub Issues](https://img.shields.io/github/issues/alexskrypnyk/scaffold-test-install-20261109102114-34825.svg)](https://github.com/alexskrypnyk/scaffold-test-install-20261109102114-34825/issues)
+[![GitHub Pull Requests](https://img.shields.io/github/issues-pr/alexskrypnyk/scaffold-test-install-20261109102114-34825.svg)](https://github.com/alexskrypnyk/scaffold-test-install-20261109102114-34825/pulls)
+[![Test PHP](https://github.com/alexskrypnyk/scaffold-test-install-20261109102114-34825/actions/workflows/test-php.yml/badge.svg)](https://github.com/alexskrypnyk/scaffold-test-install-20261109102114-34825/actions/workflows/test-php.yml)
+[![Test Node.js](https://github.com/alexskrypnyk/scaffold-test-install-20261109102114-34825/actions/workflows/test-nodejs.yml/badge.svg)](https://github.com/alexskrypnyk/scaffold-test-install-20261109102114-34825/actions/workflows/test-nodejs.yml)
+[![Test Shell](https://github.com/alexskrypnyk/scaffold-test-install-20261109102114-34825/actions/workflows/test-shell.yml/badge.svg)](https://github.com/alexskrypnyk/scaffold-test-install-20261109102114-34825/actions/workflows/test-shell.yml)
+[![codecov](https://codecov.io/gh/alexskrypnyk/scaffold-test-install-20261109102114-34825/graph/badge.svg)](https://codecov.io/gh/alexskrypnyk/scaffold-test-install-20261109102114-34825)
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/alexskrypnyk/scaffold-test-install-20261109102114-34825)
+![LICENSE](https://img.shields.io/github/license/alexskrypnyk/scaffold-test-install-20261109102114-34825)
+![Renovate](https://img.shields.io/badge/renovate-enabled-green?logo=renovatebot)
+
+</div>
+
+---
+
+## Features
+
+- Your first feature as a list item
+- Your second feature as a list item
+- Your third feature as a list item
+- Architecture documentation in `docs/content/architecture/`, which an AI agent regenerates with the `update-architecture-docs` skill when you ask it to "update architecture docs"
+
+## Installation
+
+Install the PHP package with Composer:
+
+```bash
+composer require alexskrypnyk/scaffold-test-install-20261109102114-34825
+```
+
+Download the Node.js script, `nodejs-script`, from the [latest release](https://github.com/alexskrypnyk/scaffold-test-install-20261109102114-34825/releases/latest) and make it executable:
+
+```bash
+chmod +x nodejs-script
+```
+
+Copy the shell script, `scaffold-test-install-20261109102114-34825.sh`, from this repository and make it executable:
+
+```bash
+chmod +x scaffold-test-install-20261109102114-34825.sh
+```
+
+## Usage
+
+Run the PHP command that Composer installs:
+
+```bash
+vendor/bin/scaffold-test-install-20261109102114-34825
+```
+
+The command takes the following arguments and options:
+
+| Name        | Default value | Description                        |
+|-------------|---------------|------------------------------------|
+| `arg1`      | None          | Description of the first argument. |
+| `--option1` | `default1`    | Option with a default value.       |
+| `--option2` | None          | Flag that takes no value.          |
+
+Run the Node.js script:
+
+```bash
+./nodejs-script value/of/argument
+```
+
+Run the shell script:
+
+```bash
+./scaffold-test-install-20261109102114-34825.sh
+```
+
+## Contribute
+
+[`CONTRIBUTING.md`](CONTRIBUTING.md) lists the commands that install the dependencies and run the linters and tests.
+
+## Configure the GitHub repository
+
+To apply the Scaffold repository settings, labels and default branch ruleset to this project's GitHub repository, run the following command in the project's root directory:
+
+```bash
+curl -fsSL https://getscaffold.dev/install.sh | bash -s -- github
+```
+
+The command needs [GitHub CLI](https://cli.github.com) and a GitHub token in `SCAFFOLD_GITHUB_TOKEN`. The [GitHub repository setup](https://getscaffold.dev/github) page lists the permissions the token needs.
+
+## Update from the template
+
+To pull the latest infrastructure from the Scaffold template into this project, ask Claude Code to "update scaffold". Claude Code follows the instructions in [`AGENTS.md`](AGENTS.md).
+
+---
+_This repository was created using the [Scaffold](https://getscaffold.dev/) project template_

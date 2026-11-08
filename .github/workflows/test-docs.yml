@@ -1,0 +1,70 @@
+name: Test Docs
+
+on:
+  schedule:
+    - cron: '23 4 * * *'
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - 'main'
+      - 'feature/**'
+
+jobs:
+  test-docs:
+    name: Test documentation
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      pull-requests: write # 'actions-netlify' posts the deploy preview as a PR comment.
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Setup Node.js
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7
+
+      - name: Install dependencies
+        run: npm install
+        working-directory: '${{ github.workspace }}/docs'
+
+      - name: Build documentation site
+        run: npm run build
+        working-directory: '${{ github.workspace }}/docs'
+
+      - name: Run tests
+        run: npm run test
+        working-directory: '${{ github.workspace }}/docs'
+
+      # A step's 'if' can't read the 'secrets' context, so check the secrets here.
+      - name: Check Netlify secrets
+        id: netlify
+        env:
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+        run: |
+          if [ -n "${NETLIFY_SITE_ID}" ] && [ -n "${NETLIFY_AUTH_TOKEN}" ]; then
+            echo "enabled=true" >> "${GITHUB_OUTPUT}"
+          fi
+
+      - name: Deploy to Netlify
+        uses: nwtgck/actions-netlify@d22a32a27c918fe470bbc562e984f80ec48c2668 # v4.0
+        if: ${{ steps.netlify.outputs.enabled == 'true' && github.event_name != 'schedule' }}
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          publish-dir: 'docs/build'
+          production-branch: main
+          deploy-message: "Deploy from GitHub Actions"
+          enable-pull-request-comment: true
+          enable-commit-comment: true
+          overwrites-pull-request-comment: true
+        env:
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+        timeout-minutes: 1

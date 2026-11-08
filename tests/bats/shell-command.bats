@@ -1,0 +1,54 @@
+#!/usr/bin/env bats
+#
+# Test scaffold-test-install-20261109102114-34825.sh functionality.
+#
+# Example usage:
+# ./tests/bats/node_modules/.bin/bats --no-tempdir-cleanup --formatter tap --filter-tags smoke tests/bats
+#
+# shellcheck disable=SC2030,SC2031,SC2034
+
+load _helper
+
+export BATS_HELPERS_FIXTURE_EXPORT_CODEBASE_ENABLED=1
+
+# Script file for TUI testing.
+export SCRIPT_FILE="scaffold-test-install-20261109102114-34825.sh"
+
+# bats test_tags=smoke
+@test "Data can be fetched from the API with user input" {
+  tui_run general y
+  assert_success
+  assert_output_contains "https://official-joke-api.appspot.com/jokes/general/random"
+}
+
+@test "Data can be fetched from the API with CLI arguments" {
+  export SHOULD_PROCEED=y
+
+  tui_run programming
+  assert_success
+  assert_output_contains "https://official-joke-api.appspot.com/jokes/programming/random"
+}
+
+@test "Data can be fetched from the API with CLI arguments, aborting" {
+  export SHOULD_PROCEED=n
+
+  tui_run programming
+  assert_success
+  assert_output_contains "Aborting."
+}
+
+@test "Mocked endpoint" {
+  declare -a STEPS=(
+    '@curl -sL https://official-joke-api.appspot.com/jokes/mocked_topic/random # [{"type":"mocked_topic","setup":"mocked_setup","punchline":"mocked_punchline","id":251}]'
+  )
+
+  mocks="$(steps_run "setup")"
+
+  export SHOULD_PROCEED=y
+  tui_run mocked_topic
+  assert_success
+  assert_output_contains "mocked_setup"
+  assert_output_contains "mocked_punchline"
+
+  steps_run "assert" "${mocks[@]}"
+}

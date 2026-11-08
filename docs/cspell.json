@@ -1,0 +1,43 @@
+{
+    "dictionaries": [
+        "bash",
+        "misc",
+        "node",
+        "php",
+        "softwareTerms"
+    ],
+    "words": [
+        "Cobertura",
+        "asciicast",
+        "asciinema",
+        "autoloader",
+        "Buildx",
+        "calver",
+        "cobertura",
+        "daemonized",
+        "lhotari",
+        "mksh",
+        "owenthereal",
+        "ruleset",
+        "softprops",
+        "toshimaru",
+        "upterm"
+    ],
+    "overrides": [
+        {
+            "filename": "**/*.mdx",
+            "languageId": [
+                "mdx",
+                "markdown"
+            ]
+        }
+    ],
+    "languageSettings": [
+        {
+            "languageId": "markdown",
+            "ignoreRegExpList": [
+                "/^\\s*```(.|\\n)+?^\\s*```/gm"
+            ]
+        }
+    ]
+}
